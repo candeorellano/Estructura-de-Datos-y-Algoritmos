@@ -104,6 +104,63 @@ class ArbolBinarioBusqueda:
         return self.buscar_recursivo(self.__raiz, dato)
 
     def buscar_recursivo(self, nodo, dato):
+        valor = None
         #Si (sub)arbol vacio -> Error
         if nodo is None:
             raise ValueError(f"Error: Elemento {dato} inexistente")
+        else:
+            if dato == nodo.get_dato():
+                valor = nodo
+            elif dato < nodo.get_dato():
+                valor = self.buscar_recursivo(nodo.get_izquierda(), dato)
+            else:
+                valor = self.buscar_recursivo(nodo.get_derecha(), dato)
+
+        return valor
+
+    #PREORDEN
+    def preorden(self):
+        self.preorden_recursivo(self.__raiz)
+        print() #salto de linea
+
+    def preorden_recursivo(self, nodo):
+        #Si Arbol No Vacio
+        if nodo is not None:
+            #Procesar Nodo R
+            print(nodo.get_dato())
+            #Subarbol izq
+            self.preorden_recursivo(nodo.get_izquierda())
+            #Subarbol der
+            self.preorden_recursivo(nodo.get_derecha())
+
+    #INORDEN
+    def inorden(self):
+        self.inorden_recursivo(self.__raiz)
+        print()
+
+    def inorden_recursivo(self, nodo):
+        if nodo is not None:
+            #Subarbol izq
+            self.inorden_recursivo(nodo.get_izquierda())
+            #Procesar Nodo R
+            print(nodo.get_dato())
+            #Subarbol der
+            self.inorden_recursivo(nodo.get_derecha())
+
+    #POSTORDEN
+    def postorden(self):
+        self.postorden_recursivo(self.__raiz)
+
+    def postorden_recursivo(self, nodo):
+        if nodo is not None:
+            #Subarbol izq
+            self.postorden_recursivo(nodo.get_izquierda())
+            #Subarbol der
+            self.postorden_recursivo(nodo.get_derecha())
+            #Procesar Nodo R
+            print(nodo.get_dato())
+
+    def getRaiz(self):
+        return self.__raiz
+
+    
